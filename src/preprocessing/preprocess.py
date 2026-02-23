@@ -11,9 +11,3 @@ def drop_constant_sensors(df):
     return df
 
 
-def normalize_sensors(df):
-    sensor_cols = [col for col in df.columns if "sensor_" in col]
-    
-    df[sensor_cols] = (df[sensor_cols] - df[sensor_cols].mean()) / df[sensor_cols].std()
-    
-    return df

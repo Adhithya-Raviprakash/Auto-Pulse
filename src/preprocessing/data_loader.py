@@ -2,24 +2,26 @@
 import pandas as pd
 import os
 
-COLUMN_NAMES = (
-    ["unit", "cycle"] +
-    [f"setting_{i}" for i in range(1, 4)] +
-    [f"sensor_{i}" for i in range(1, 22)]
-)
-
 def load_txt_file(filepath):
     df = pd.read_csv(
         filepath,
         sep=r"\s+",
         header=None
     )
-    
-    df = df.iloc[:, :26]  # remove extra blank columns
-    df.columns = COLUMN_NAMES
-    
     return df
 
+def add_column_names(df):
+
+    # Keep only first 26 columns (CMAPSS standard format)
+    df = df.iloc[:, :26]
+
+    columns = ['engine_id', 'cycle']
+    columns += [f'op_setting_{i}' for i in range(1, 4)]
+    columns += [f'sensor_{i}' for i in range(1, 22)]
+
+    df.columns = columns
+
+    return df
 
 def load_multiple_files(base_path, file_list):
     all_data = []

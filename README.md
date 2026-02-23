@@ -46,3 +46,31 @@ Multivariate time-series sensor data
 Multiple engines with degradation cycles
 
 Failure labels and Remaining Useful Life (RUL)
+
+
+predictive-maintenance-vehicle/
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│
+├── notebooks/
+│   ├── 01_eda.ipynb
+│   ├── 02_feature_engineering.ipynb
+│   ├── 03_model_training.ipynb
+│
+├── src/
+│   ├── data_preprocessing.py
+│   ├── feature_engineering.py
+│   ├── train_model.py
+│   ├── predict.py
+│
+├── models/
+│   ├── random_forest.pkl
+│   ├── xgboost_model.pkl
+│
+├── app/
+│   └── app.py
+│
+├── requirements.txt
+└── README.md
