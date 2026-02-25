@@ -15,11 +15,24 @@ def add_column_names(df):
     # Keep only first 26 columns (CMAPSS standard format)
     df = df.iloc[:, :26]
 
-    columns = ['engine_id', 'cycle']
-    columns += [f'op_setting_{i}' for i in range(1, 4)]
-    columns += [f'sensor_{i}' for i in range(1, 22)]
+    index_names = ['engine_id', 'cycle']
 
-    df.columns = columns
+    operational_settings = ['setting_1', 'setting_2', 'setting_3']
+
+    sensor_names = [
+    'T2', 'T24', 'T30', 'T50',
+    'P2', 'P15', 'P30',
+    'Nf', 'Nc', 'epr', 'Ps30',
+    'phi', 'NRf', 'NRc',
+    'BPR', 'farB', 'htBleed',
+    'Nf_dmd', 'PCNfR_dmd',
+    'W31', 'W32'
+    ]
+
+    col_names = index_names + operational_settings + sensor_names
+
+    # Assign new column names
+    df.columns = col_names
 
     return df
 
