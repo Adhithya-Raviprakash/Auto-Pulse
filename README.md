@@ -105,7 +105,6 @@ Raw sensor readings alone don't sufficiently capture gradual degradation pattern
 | **Rolling Mean** | Smoothed averages over recent cycles | Suppress noise; surface long-term trends |
 | **Rolling Slope** | Linear regression slope over a rolling window | Capture degradation velocity and direction |
 | **Delta Features** | Cycle-over-cycle sensor difference | Detect sudden shifts and short-term instability |
-| **Lifecycle Progress** | `cycle / max_cycle_per_engine` (normalized) | Inform model of engine's current lifecycle stage |
 
 > **Rolling slope features** are particularly impactful — encoding both the direction and rate of degradation significantly improves RUL prediction across long lifecycle spans.
 
