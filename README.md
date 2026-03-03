@@ -50,7 +50,7 @@ Raw and processed CSV files are **not included** in this repository due to stora
 
 To reproduce results:
 
-1. Download the NASA CMAPSS dataset from the [NASA data portal](https://data.nasa.gov/dataset/CMAPSS-Jet-Engine-Simulated-Data/ff5v-kuh6)
+1. Download the NASA CMAPSS dataset from the [NASA data portal](https://data.nasa.gov/dataset/cmapss-jet-engine-simulated-data)
 2. Place raw files inside `data/raw/`
 3. Run preprocessing and feature engineering scripts to generate processed data in `data/processed/`
 
