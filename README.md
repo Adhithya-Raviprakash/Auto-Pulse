@@ -19,7 +19,7 @@
 
 ## Project Overview
 
-This project implements a complete **predictive maintenance pipeline** using the [NASA CMAPSS]([https://data.nasa.gov/dataset/CMAPSS-Jet-Engine-Simulated-Data/ff5v-kuh6](https://data.nasa.gov/dataset/cmapss-jet-engine-simulated-data)) turbofan engine degradation dataset.
+This project implements a complete **predictive maintenance pipeline** using the [NASA CMAPSS]([https://data.nasa.gov/dataset/CMAPSS-Jet-Engine-Simulated-Data/ff5v-kuh6](https://data.nasa.gov/dataset/cmapss-jet-engine-simulated-data)]) turbofan engine degradation dataset.
 
 The core objective is to predict the **Remaining Useful Life (RUL)** of aircraft engines before failure, enabling proactive maintenance decisions.
 
