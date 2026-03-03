@@ -50,30 +50,7 @@ data/raw/
 Run preprocessing and feature engineering notebooks to generate processed data inside:
 
 data/processed/
-Project Structure
-predictive-maintenance-vehicle/
-│
-├── data/
-│   ├── raw/
-│   ├── processed/
-│
-├── notebooks/
-│   ├── 01_eda.ipynb
-│   ├── 04_eda_processed.ipynb
-│   ├── 02_feature_engineering.ipynb
-│   ├── 03_model_test.ipynb
-│
-├── src/
-│   ├── data_preprocessing.py
-│   ├── feature_engineering.py
-│   ├── train_model.py
-│
-├── models/
-│   ├── random_forest.pkl
-│   ├── xgboost_model.pkl
-│
-├── requirements.txt
-└── README.md
+
 Workflow
 1. Exploratory Data Analysis
 
@@ -183,18 +160,26 @@ Step 2: Download Dataset
 Place raw CMAPSS files inside:
 
 data/raw/
-Step 3: Run Notebooks in Order
+Step 3:Run Preprocessing and train models
+, propocessing in src/preprocessing/save_preprocess.py
+, model training in src/train_model/train_model.py
+
+  in that order
+Step 4: Run Notebooks in Order
 
 01_eda.ipynb
 
-02_feature_engineering.ipynb
+02_eda_processed.ipnb
 
-03_model_test.ipynb
+03_feature_engineering.ipynb
 
-Alternatively, train models directly:
+04_model_test.ipynb
+
+, train models directly:
 
 python src/train_model.py
-Key Takeaways
+
+Key Takeaways:
 
 Time-aware feature engineering is critical for degradation modeling.
 
