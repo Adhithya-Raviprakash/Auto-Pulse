@@ -193,17 +193,4 @@ Explore the full analysis in sequence:
 
 ---
 
-## Conclusion
-
-This project demonstrates a production-style Data Science pipeline for predictive maintenance, combining:
-
-- Statistical trend analysis
-- Temporal feature engineering
-- Comparative model benchmarking
-- Residual & lifecycle diagnostics
-
-It reflects a practical understanding of time-series degradation modeling and how thoughtful feature design drives predictive accuracy in industrial maintenance applications.
-
----
-
 *Dataset: NASA CMAPSS Jet Engine Simulated Data — publicly available via the NASA data portal.*
