@@ -1,53 +1,56 @@
-📌 Predictive Maintenance Model for Vehicle Component Failure using Sensor Data
-🚗 Overview
+Predictive Maintenance using NASA CMAPSS Dataset
+Project Overview
 
-This project builds an end-to-end predictive maintenance system that estimates:
+This project implements an end-to-end predictive maintenance pipeline using the NASA CMAPSS turbofan engine degradation dataset.
 
-🔴 Failure Probability of a vehicle component
+The objective is to predict Remaining Useful Life (RUL) of aircraft engines based on multivariate time-series sensor data collected over operational cycles.
 
-⏳ Remaining Useful Life (RUL)
+This project emphasizes a Data Science workflow:
 
-📊 Component Risk Level
+Degradation pattern analysis
 
-The model uses time-series sensor readings (temperature, vibration, pressure, RPM, etc.) to predict potential failures before they occur.
+Time-aware feature engineering
 
-This solution simulates real-world predictive maintenance systems used in:
+Model benchmarking
 
-Tesla
+Statistical evaluation
 
-Ford
+Diagnostic error analysis
 
-Bosch
+The focus is not only model training, but understanding degradation behavior and interpreting model performance.
 
-Fleet vehicle monitoring systems
+Dataset
 
-EV battery management systems
+Dataset: NASA CMAPSS (Commercial Modular Aero-Propulsion System Simulation)
 
-🎯 Business Problem
+Each engine:
 
-Unexpected vehicle component failure leads to:
+Operates across multiple cycles
 
-High maintenance cost
+Contains multiple sensor measurements per cycle
 
-Warranty claims
+Gradually degrades until failure
 
-Downtime in fleet vehicles
+Target variable:
 
-Safety risks
+Remaining Useful Life (RUL)
 
-This project predicts failures in advance, enabling preventive maintenance instead of reactive repair.
+Important Note About Data
 
-📊 Dataset
+The raw and processed CSV files are not included in this repository due to storage limitations.
 
-NASA Turbofan Engine Dataset (CMAPSS) {Current Choice}
+To reproduce results:
 
-Multivariate time-series sensor data
+Download the NASA CMAPSS dataset.
 
-Multiple engines with degradation cycles
+Place raw files inside:
 
-Failure labels and Remaining Useful Life (RUL)
+data/raw/
 
+Run preprocessing and feature engineering notebooks to generate processed data inside:
 
+data/processed/
+Project Structure
 predictive-maintenance-vehicle/
 │
 ├── data/
@@ -56,21 +59,163 @@ predictive-maintenance-vehicle/
 │
 ├── notebooks/
 │   ├── 01_eda.ipynb
+│   ├── 04_eda_processed.ipynb
 │   ├── 02_feature_engineering.ipynb
-│   ├── 03_model_training.ipynb
+│   ├── 03_model_test.ipynb
 │
 ├── src/
 │   ├── data_preprocessing.py
 │   ├── feature_engineering.py
 │   ├── train_model.py
-│   ├── predict.py
 │
 ├── models/
 │   ├── random_forest.pkl
 │   ├── xgboost_model.pkl
 │
-├── app/
-│   └── app.py
-│
 ├── requirements.txt
 └── README.md
+Workflow
+1. Exploratory Data Analysis
+
+01_eda.ipynb
+Initial exploration of raw sensor data to:
+
+Identify degradation trends
+
+Detect constant or non-informative sensors
+
+Analyze lifecycle patterns
+
+04_eda_processed.ipynb
+Validation of engineered features and transformed dataset.
+
+2. Feature Engineering
+
+02_feature_engineering.ipynb
+
+Raw sensor readings alone do not sufficiently capture gradual degradation patterns. Therefore, time-aware features were engineered.
+
+Rolling Mean
+
+Rolling averages smooth short-term noise and highlight long-term degradation behavior.
+
+This helps the model detect slow deterioration rather than reacting to random fluctuations.
+
+Rolling Slope (Trend Feature)
+
+Rolling slope is computed using linear regression over recent cycles.
+
+This captures:
+
+Direction of change
+
+Rate of degradation
+
+Slope encodes degradation velocity and significantly improves lifecycle modeling.
+
+Delta Features
+
+Delta = difference between current value and previous cycle.
+
+This captures short-term instability and sudden sensor shifts that may indicate accelerating degradation.
+
+Lifecycle Progress Feature
+
+Normalized cycle progression:
+
+cycle / max_cycle_per_engine
+
+This explicitly informs the model about the engine’s stage in its lifecycle.
+
+3. Model Training
+
+03_model_test.ipynb and src/train_model.py
+
+Models implemented:
+
+Random Forest (baseline)
+
+XGBoost (final model)
+
+Random Forest training time: approximately 5 minutes depending on hardware.
+Rolling feature computation may also take several minutes due to grouped operations.
+
+Please allow time for feature engineering and training steps to complete.
+
+Model Performance
+Model	RMSE	MAE	R²
+Random Forest	13.09	9.56	0.80
+XGBoost	12.07	8.74	0.83
+
+Key Observations:
+
+XGBoost reduced RMSE by approximately 8% over Random Forest.
+
+The final model explains 83% of variance in RUL.
+
+Average prediction error is approximately 9 cycles.
+
+Evaluation Strategy
+
+Model evaluation includes:
+
+RMSE
+
+MAE
+
+R²
+
+Correlation analysis
+
+Actual vs Predicted scatter plots
+
+Engine-wise degradation visualization
+
+Residual diagnostics
+
+This ensures model behavior is interpreted and validated rather than evaluated solely by aggregate metrics.
+
+How to Reproduce
+Step 1: Install Dependencies
+pip install -r requirements.txt
+Step 2: Download Dataset
+
+Place raw CMAPSS files inside:
+
+data/raw/
+Step 3: Run Notebooks in Order
+
+01_eda.ipynb
+
+02_feature_engineering.ipynb
+
+03_model_test.ipynb
+
+Alternatively, train models directly:
+
+python src/train_model.py
+Key Takeaways
+
+Time-aware feature engineering is critical for degradation modeling.
+
+Rolling slope features significantly improve predictive accuracy.
+
+Gradient boosting methods outperform bagging methods in lifecycle modeling.
+
+Diagnostic analysis is essential for predictive maintenance systems.
+
+Conclusion
+
+This project demonstrates a complete Data Science pipeline for predictive maintenance, combining:
+
+Statistical trend analysis
+
+Temporal feature engineering
+
+Model benchmarking
+
+Performance diagnostics
+
+Lifecycle interpretation
+
+It reflects practical understanding of time-series degradation modeling and predictive analytics.

@@ -63,7 +63,7 @@ def train_and_save_models(train_path, test_path):
     print("NASA Score:", rf_nasa)
 
     # Save RF model
-    with open("random_forest_model.pkl", "wb") as f:
+    with open("models/random_forest_model.pkl", "wb") as f:
         pickle.dump(rf, f)
 
     print("Random Forest model saved as random_forest_model.pkl")
@@ -99,7 +99,7 @@ def train_and_save_models(train_path, test_path):
     print("NASA Score:", xgb_nasa)
 
     # Save XGB model
-    with open("xgboost_model.pkl", "wb") as f:
+    with open("models/xgboost_model.pkl", "wb") as f:
         pickle.dump(xgb_model, f)
 
     print("XGBoost model saved as xgboost_model.pkl")

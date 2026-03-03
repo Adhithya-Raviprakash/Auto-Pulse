@@ -7,20 +7,19 @@ from scipy.stats import linregress
 
 #2.Delta Feature (Rate Of Change)
 def add_delta_features(df):
-
-    exclude_cols = ["engine_id", "cycle", "RUL"]
     
-    sensor_cols = (
-        df.select_dtypes(include=["float64", "int64"])
-        .columns
-        .difference(exclude_cols)
-    )
+    df = df.copy()
+    exclude_cols = ["engine_id", "cycle", "RUL"]
+    sensor_cols = df.select_dtypes(include=["float64", "int64"]).columns.difference(exclude_cols)
+
+    new_features = []
 
     for col in sensor_cols:
-        df[f"{col}_delta"] = df.groupby("engine_id")[col].diff()
+        delta = df.groupby("engine_id")[col].diff()
+        new_features.append(delta.rename(f"{col}_delta"))
 
+    df = pd.concat([df] + new_features, axis=1)
     return df
-
 
 # 3. Operating Condition Clustering
 

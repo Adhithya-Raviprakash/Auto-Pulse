@@ -1,6 +1,6 @@
 
 from config import DATA_PATH
-from rolling_feature import add_rolling_features
+from rolling_feature import add_rolling_features, add_rolling_slope
 from data_loader import load_train, load_test
 import feature_engineering
 
@@ -21,7 +21,9 @@ def run_pipeline(base_path):
     print("Adding rolling features...")
     train_df = add_rolling_features(train_df)
     test_df  = add_rolling_features(test_df)
-
+    train_df = add_rolling_slope(train_df, window=20)
+    test_df = add_rolling_slope(test_df, window=20)
+    
     print("Adding delta features...")
     train_df = feature_engineering.add_delta_features(train_df)
     test_df  = feature_engineering.add_delta_features(test_df)
